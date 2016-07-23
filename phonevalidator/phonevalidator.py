@@ -15,7 +15,6 @@ from phonenumbers import (
 class Validator(Validator):
     """ A custom cerberus.Validator subclass adding the `phonenumber` constraint
     to Cerberus validation's.
-
     """
     def __init__(self, *args, formatter=None, region=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,33 +22,54 @@ class Validator(Validator):
         self.region = None
 
         if formatter is not None:
+            # set formatter for this instance to the formatter
+            # passed in if valid, if not self.formatter will
+            # get set to the default (`PhoneNumberFormat.NATIONAL`)
             self._set_formatter(
                 formatter=formatter
             )
 
         if region is not None:
+            # set the region for this instance to validate
+            # phone numbers against if valid, if not valid
+            # the self.region will get set to the default
+            # ('US')
             self._set_region(
                 region=region
             )
 
     def _default_region(self):
+        """ Return's a default region string.
+
+            We will try to get a region from the environment variable
+            'DEFAULT_PHONE_REGION' if not found or not valid, then
+            we default to 'US'
+        """
         region = environ.get('DEFAULT_PHONE_REGION')
         if region and region.upper() in SUPPORTED_REGIONS:
             return region.upper()
         return 'US'
 
     def _is_valid_region(self, region):
+        """ Return's True if region is valid, False otherwise
+        """
         if isinstance(region, str) and region.upper() in SUPPORTED_REGIONS:
             return True
         return False
 
     def _set_region(self, region=None):
+        """ Set's a region to use to validate phone numbers for this
+            instance.
+        """
         if self._is_valid_region(region):
             self.region = region.upper()
         else:
             self.region = self._default_region()
 
     def _set_default_formatter(self):
+        """ Try's to get a formatter string from the environment
+            or defaults to `phonenumbers.PhoneNumberFormat.NATIONAL`
+        """
         env_format = environ.get('DEFAULT_PHONE_FORMAT')
         if env_format is not None:
             self._set_formatter(
@@ -59,6 +79,9 @@ class Validator(Validator):
             self.formatter = PhoneNumberFormat.NATIONAL
 
     def _set_formatter(self, formatter=None):
+        """ Set's formatter for this instance, or defaults to
+            `phonenumbers.PhoneNumberFormat.NATIONAL`
+        """
         if formatter is None or not isinstance(formatter, str):
             self._set_default_formatter()
         else:
@@ -71,13 +94,11 @@ class Validator(Validator):
     def _validate_formatPhoneNumber(self, formatPhoneNumber, field, value):
         """ Fake validate function to let cerberus accept "formatPhoneNumber"
             as a keyword in the schema.
-
         """
         pass
 
     def _validate_phoneNumberFormat(self, phoneNumberFormat, field, value):
-        """ Fake validate function to let cerberus accept "phoneNumberFormat"
-            as a keyword in the schema.
+        """ Validates a phoneNumberFormat for a phone number.
 
             :param phoneNumberFormat:  a string for accepted format.
             :accepted formats: ['NATIONAL',
@@ -95,9 +116,9 @@ class Validator(Validator):
                         'Not a valid phone number format: {}'.format(value))
 
     def _validate_region(self, region, field, value):
-        """ Fake validate function to let cerberus accept "region"
-            as a keyword in the schema.
+        """ Validates a region for a phone number.
 
+            :param region:  a region.
         """
         if self._is_valid_region(region) is False:
             self._error(field,

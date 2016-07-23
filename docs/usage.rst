@@ -1,8 +1,10 @@
+.. highlight:: python
+
 =====
 Usage
 =====
 
-To use phonevalidator in a project::
+To use phonevalidator in an :class:`eve.Eve` project::
 
     import phonevalidator
     from eve import Eve

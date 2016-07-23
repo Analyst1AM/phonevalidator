@@ -10,7 +10,7 @@ Tests for `phonevalidator` module.
 
 import pytest
 import os
-from phonevalidator.phonevalidator import Validator
+from phonevalidator import Validator
 from phonenumbers import PhoneNumberFormat
 
 
