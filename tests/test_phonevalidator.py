@@ -10,15 +10,14 @@ Tests for `phonevalidator` module.
 
 import pytest
 import os
-
 from phonevalidator.phonevalidator import (
     Validator,
     _formatter,
     _default_formatter,
     _default_region,
 )
-
 from phonenumbers import PhoneNumberFormat
+
 
 @pytest.fixture
 def base_schema():
@@ -28,14 +27,16 @@ def base_schema():
 def test_formatter_method():
     # default
     assert _formatter() == PhoneNumberFormat.NATIONAL
-    # returns the correct format even if not capitalized 
+    # returns the correct format even if not capitalized
     assert _formatter('InTeRNATIONAL') == PhoneNumberFormat.INTERNATIONAL
+
 
 def test_default_formatter_method():
     assert _default_formatter() == 'DEFAULT'
     os.environ['PHONE_NUMBER_FORMAT'] = 'INTERNATIONAL'
     assert _default_formatter() == 'INTERNATIONAL'
     os.environ['PHONE_NUMBER_FORMAT'] = ''
+
 
 def test_default_region_method():
     assert _default_region() == 'US'
@@ -60,6 +61,7 @@ def test_phone_number_valid(base_schema):
     assert v.validate(doc)
     assert v.document['phone'] == '5135555555'
 
+
 def test_phoneNumberFormat_fail(base_schema):
     base_schema['phone'].update({
         'phoneNumberFormat': 'InvalidFormat',
@@ -68,6 +70,14 @@ def test_phoneNumberFormat_fail(base_schema):
     })
     doc = {'phone': '5135555555'}
     v = Validator(base_schema)
+    assert v.validate(doc) is False
+
+
+def test_region_fail(base_schema):
+    # non valid region
+    schema = {'phone': {'type': 'phonenumber', 'region': 'XYZ'}}
+    doc = {'phone': '5135555555'}
+    v = Validator(schema)
     assert v.validate(doc) is False
 
 

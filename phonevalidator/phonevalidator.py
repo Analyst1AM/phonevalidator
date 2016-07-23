@@ -19,11 +19,14 @@ _formats = {
     'DEFAULT': PhoneNumberFormat.NATIONAL,
 }
 
+
 def _default_formatter():
     return environ.get('PHONE_NUMBER_FORMAT', 'DEFAULT')
 
+
 def _default_region():
     return environ.get('DEFAULT_PHONE_REGION', 'US')
+
 
 def _formatter(formatter=None):
     # returns a phonenumber.PhoneNumberFormat used to format
@@ -31,7 +34,8 @@ def _formatter(formatter=None):
     if not formatter or not isinstance(formatter, str):
         formatter = _default_formatter()
     return _formats.get(formatter.upper())
-    
+
+
 class Validator(Validator):
 
     def _validate_formatPhoneNumber(self, formatPhoneNumber, field, value):
@@ -46,10 +50,13 @@ class Validator(Validator):
             as a keyword in the schema.
 
             :param phoneNumberFormat:  a string for accepted format.
-                :accepted formats: ['NATIONAL', 'INTERNATIONAL', 'RFC3966', 'E164']
+            :accepted formats: ['NATIONAL',
+                                'INTERNATIONAL',
+                                'RFC3966',
+                                'E164'
+                                ]
 
         """
-        print('phoneNumberFormat', phoneNumberFormat)
         if phoneNumberFormat.upper() not in _formats.keys():
             self._error(field,
                         'Not a valid phone number format: {}'.format(value))
@@ -63,7 +70,7 @@ class Validator(Validator):
 
     def _validate_type_phonenumber(self, field, value):
         """ Validates a phone number is valid. Optionally formatting the number.
-            
+
             :param field:  field name.
             :param value:  field value.
         """
@@ -78,11 +85,11 @@ class Validator(Validator):
             elif self.schema[field].get('formatPhoneNumber'):
                 # if the schema's 'formatPhoneNumber' is set to True,
                 # format the phone number using a formatter derived from
-                # the schema's 'phoneNumberFormat' value, next checks the environment
-                # variable 'PHONE_NUMBER_FORMAT', or defaults to 'NATIONAL'.
-                #
+                # the schema's 'phoneNumberFormat' value, next checks the
+                # environmen variable 'PHONE_NUMBER_FORMAT',
+                # or defaults to 'NATIONAL'.
                 formatter = _formatter(
-                    self.schema[field].get('phoneNumberFormat') 
+                    self.schema[field].get('phoneNumberFormat')
                 )
                 self.document[field] = format_number(phone_number, formatter)
         except NumberParseException:
