@@ -11,6 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'phonenumbers==7.4.5',
+    'eve==0.6.4',
 ]
 
 test_requirements = [
