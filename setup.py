@@ -25,7 +25,7 @@ setup_requirements = [
 
 setup(
     name='phonevalidator',
-    version='0.0.1',
+    version='1.0.0',
     description="Custom cerberus.Validator for phone numbers",
     long_description=readme + '\n\n' + history,
     author="Michael Housh",
