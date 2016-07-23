@@ -3,6 +3,7 @@ phonevalidator
 ===============================
 
 
+<!--
 .. image:: https://img.shields.io/pypi/v/phonevalidator.svg
         :target: https://pypi.python.org/pypi/phonevalidator
 
@@ -16,7 +17,7 @@ phonevalidator
 .. image:: https://pyup.io/repos/github/m-housh/cookiecutter-django/shield.svg
      :target: https://pyup.io/repos/github/m-housh/phonevalidator/
      :alt: Updates
-
+-->
 
 Custom cerberus.Validator for phone numbers
 
