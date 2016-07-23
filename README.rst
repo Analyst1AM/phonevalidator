@@ -22,13 +22,13 @@ Custom cerberus.Validator for phone numbers
 
 
 * Free software: MIT license
-* Documentation: https://phonevalidator.readthedocs.io.
 
 
 Features
 --------
 
-* TODO
+* Custom validation's to be used in an `Eve`_ API.  Uses the `phonenumbers`_
+  package for validation's and formatting.
 
 Credits
 ---------
@@ -37,4 +37,5 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
-
+.. _`Eve`: http://python-eve.org
+.. _`phonenumbers`:  https://github.com/daviddrysdale/python-phonenumbers

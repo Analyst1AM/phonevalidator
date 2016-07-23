@@ -10,12 +10,7 @@ Tests for `phonevalidator` module.
 
 import pytest
 import os
-from phonevalidator.phonevalidator import (
-    Validator,
-    _formatter,
-    _default_formatter,
-    _default_region,
-)
+from phonevalidator.phonevalidator import Validator
 from phonenumbers import PhoneNumberFormat
 
 
@@ -24,25 +19,47 @@ def base_schema():
     return {'phone': {'type': 'phonenumber', 'region': 'US'}}
 
 
-def test_formatter_method():
-    # default
-    assert _formatter() == PhoneNumberFormat.NATIONAL
-    # returns the correct format even if not capitalized
-    assert _formatter('InTeRNATIONAL') == PhoneNumberFormat.INTERNATIONAL
+def test_Validator_init():
+    v = Validator(formatter='INTERNATIONAL', region='AS')
+    assert v.formatter == PhoneNumberFormat.INTERNATIONAL
+    assert v.region == 'AS'
+
+    v = Validator()
+    assert v.formatter is None
+    assert v.region is None
 
 
-def test_default_formatter_method():
-    assert _default_formatter() == 'DEFAULT'
-    os.environ['PHONE_NUMBER_FORMAT'] = 'INTERNATIONAL'
-    assert _default_formatter() == 'INTERNATIONAL'
-    os.environ['PHONE_NUMBER_FORMAT'] = ''
+def test_Validator_default_region():
+    v = Validator()
+    assert v._default_region() == 'US'
+
+    os.environ['DEFAULT_PHONE_REGION'] = 'AS'
+    assert v._default_region() == 'AS'
 
 
-def test_default_region_method():
-    assert _default_region() == 'US'
-    os.environ['DEFAULT_PHONE_REGION'] = 'EN'
-    assert _default_region() == 'EN'
-    os.environ['DEFAULT_PHONE_REGION'] = ''
+def test_Validator_set_formatter():
+    v = Validator()
+    assert v.formatter is None
+    v._set_formatter('NOT_VALID')
+    assert v.formatter == PhoneNumberFormat.NATIONAL
+    v.formatter = None
+    v._set_formatter()
+    assert v.formatter == PhoneNumberFormat.NATIONAL
+
+
+def test_Validator_set_default_formatter():
+    v = Validator()
+    v._set_default_formatter()
+    assert v.formatter == PhoneNumberFormat.NATIONAL
+    os.environ['DEFAULT_PHONE_FORMAT'] = 'INTERNATIONAL'
+    v._set_default_formatter()
+    assert v.formatter == PhoneNumberFormat.INTERNATIONAL
+
+
+def test_Validator_is_valid_region():
+    v = Validator()
+    assert v._is_valid_region(None) is False
+    assert v._is_valid_region('us') is True
 
 
 def test_phonenumber_fail(base_schema):
