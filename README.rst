@@ -5,6 +5,10 @@ phonevalidator
 .. image:: https://img.shields.io/travis/m-housh/phonevalidator.svg
         :target: https://travis-ci.org/m-housh/phonevalidator
 
+.. image:: https://coveralls.io/repos/m-housh/phonevalidator/badge.png?branch=master
+        :target: https://coveralls.io/r/m-housh/phonevalidator/master
+
+
 Custom `cerberus.Validator` for phone numbers
 
 
