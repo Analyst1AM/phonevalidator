@@ -6,10 +6,19 @@ Usage
 
 To use phonevalidator in an :class:`eve.Eve` project::
 
-    import phonevalidator
+    from phonevalidator import ValidatorMixin
+    from eve.io.mongo import Validator
     from eve import Eve
 
-    app = Eve(validator=phonevalidator.Validator)
+
+    class MyValidator(Validator, ValidatorMixin):
+        """ Custom Validator that adds phone number 
+        constraints to validation schemas.
+        """
+        pass
+
+
+    app = Eve(validator=MyValidator)
     ...
 
 Validation Examples::
