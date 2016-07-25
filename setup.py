@@ -11,7 +11,8 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'phonenumbers==7.4.5',
-    'eve==0.6.4',
+    'cerberus==0.9.2',
+    #'eve==0.6.4',
 ]
 
 test_requirements = [
@@ -25,7 +26,7 @@ setup_requirements = [
 
 setup(
     name='phonevalidator',
-    version='1.0.0',
+    version='1.1.0',
     description="Custom cerberus.Validator for phone numbers",
     long_description=readme + '\n\n' + history,
     author="Michael Housh",

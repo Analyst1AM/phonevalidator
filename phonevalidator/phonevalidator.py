@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from eve.io.mongo import Validator
 from os import environ
 from phonenumbers import (
     format_number,
@@ -12,12 +11,13 @@ from phonenumbers import (
 )
 
 
-class Validator(Validator):
+class ValidatorMixin(object):
     """ A custom cerberus.Validator subclass adding the `phonenumber` constraint
     to Cerberus validation's.
     """
-    def __init__(self, *args, formatter=None, region=None, **kwargs):
-        super().__init__(*args, **kwargs)
+    '''
+    def __init__(self, *args, **kwargs):
+        super(ValidatorMixin, self).__init__()
         self.formatter = None
         self.region = None
 
@@ -37,6 +37,7 @@ class Validator(Validator):
             self._set_region(
                 region=region
             )
+        '''
 
     def _default_region(self):
         """ Return's a default region string.

@@ -2,20 +2,28 @@
 # This file will be regenerated if you run travis_pypi_setup.py
 
 language: python
-python: 3.5
+python: "3.5"
 
 env:
-  - TOXENV=py35
-  - TOXENV=py34
-  - TOXENV=py33
   - TOXENV=py27
-  - TOXENV=py26
-  - TOXENV=pypy
+  - TOXENV=py33
+  - TOXNV=py34
+  - TOXENV=py35
 
+before_install:
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox
+install: 
+    - pip install -U tox
+    - pip install -U .
+    - pip install -U coveralls
 
 # command to run tests, e.g. python setup.py test
-script: tox -e ${TOXENV}
+script: tox -e "${TOXENV}"
+#script: python setup.py test
+
+after_success:
+    coveralls
 
 
