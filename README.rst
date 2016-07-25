@@ -22,10 +22,9 @@ Features
   package for validation's and formatting.
 
 Usage
----------
+-------
 
 .. include:: usage.rst
-.. include:: docs/usage.rst
 
 Credits
 ---------
