@@ -21,7 +21,11 @@ Features
 * Custom validation's to be used in an `Eve`_ API.  Uses the `phonenumbers`_
   package for validation's and formatting.
 
+Usage
+---------
+
 .. include:: usage.rst
+.. include:: docs/usage.rst
 
 Credits
 ---------
