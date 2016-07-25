@@ -37,5 +37,5 @@ class Validator(SuperValidator, ValidatorMixin):
 
 __author__ = 'Michael Housh'
 __email__ = 'mhoush@houshhomeenergy.com'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __all__ = ['Validator', 'ValidatorMixin']
