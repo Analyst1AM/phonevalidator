@@ -8,6 +8,7 @@ phonevalidator
 .. image:: https://coveralls.io/repos/github/m-housh/phonevalidator/badge.svg?branch=master
         :target: https://coveralls.io/github/m-housh/phonevalidator?branch=master
 
+
 Custom `cerberus.Validator` for phone numbers
 
 
@@ -19,6 +20,8 @@ Features
 
 * Custom validation's to be used in an `Eve`_ API.  Uses the `phonenumbers`_
   package for validation's and formatting.
+
+.. include:: usage.rst
 
 Credits
 ---------
