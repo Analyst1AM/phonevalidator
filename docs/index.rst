@@ -16,6 +16,7 @@ Contents:
    contributing
    authorshistory
    history
+   license
 
 Indices and tables
 ==================
