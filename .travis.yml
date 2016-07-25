@@ -17,10 +17,12 @@ before_install:
 install: 
     - pip install -U tox
     - pip install -U .
+    - pip install -r requirements_dev.txt
     - pip install -U coveralls
 
 # command to run tests, e.g. python setup.py test
-script: tox -e "${TOXENV}"
+#script: tox -e "${TOXENV}"
+script: make test
 #script: python setup.py test
 
 after_success:
