@@ -9,9 +9,9 @@ python:
   - "3.5"
 
 env:
-  - TOSENV=py27
-  - TOSENV=py33
-  - TOSENV=py34
+  - TOXENV=py27
+  - TOXENV=py33
+  - TOXNV=py34
   - TOXENV=py35
 
 before_install:
@@ -24,8 +24,8 @@ install:
     - pip install -U coveralls
 
 # command to run tests, e.g. python setup.py test
-#script: tox -e "${TOXENV}"
-script: python setup.py test
+script: tox -e "${TOXENV}"
+#script: python setup.py test
 
 after_success:
     coveralls
