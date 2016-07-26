@@ -61,7 +61,6 @@ test: activate  ## run tests quickly with the default Python
 	
 test-all: clean  deactivate  ## run tests on every Python version with tox
 	tox
-	$(MAKE) -C activate
 
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source phonevalidator py.test
