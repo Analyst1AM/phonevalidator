@@ -56,7 +56,7 @@ deactivate: ## deactivate the virtualenv
 lint: ## check style with flake8
 	flake8 phonevalidator tests
 
-test: ## run tests quickly with the default Python
+test: activate  ## run tests quickly with the default Python
 	py.test -v --cov-report term-missing --cov phonevalidator
 	
 test-all: clean  deactivate  ## run tests on every Python version with tox
