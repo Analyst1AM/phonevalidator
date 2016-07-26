@@ -1,0 +1,6 @@
+version: '2'
+services:
+    tox:
+        build: .
+        volumes:
+            - .:/usr/src/app
