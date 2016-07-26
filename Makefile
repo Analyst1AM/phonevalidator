@@ -26,6 +26,9 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
+activate:  ## activate the virtualenv
+	pyenv local phonevalidator
+
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
 
@@ -47,15 +50,18 @@ clean-test: ## remove test and coverage artifacts
 	rm -f .coverage
 	rm -fr htmlcov/
 
+deactivate: ## deactivate the virtualenv
+	pyenv local --unset
+
 lint: ## check style with flake8
 	flake8 phonevalidator tests
 
 test: ## run tests quickly with the default Python
 	py.test -v --cov-report term-missing --cov phonevalidator
 	
-
-test-all: ## run tests on every Python version with tox
+test-all: clean  deactivate  ## run tests on every Python version with tox
 	tox
+	$(MAKE) -C activate
 
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source phonevalidator py.test

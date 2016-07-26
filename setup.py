@@ -17,7 +17,8 @@ requirements = [
 
 test_requirements = [
     'pytest',
-    'pytest-cov'
+    'pytest-cov',
+    'pytest-pep8',
 ]
 
 setup_requirements = [
@@ -43,7 +44,7 @@ setup(
     keywords='phonevalidator',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
+        'Intende Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
