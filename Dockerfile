@@ -1,3 +1,3 @@
-FROM mhoush/tox
+FROM mhoush/tox-onbuild
 
-CMD ["make", "test-all"]
+CMD ["tox"]

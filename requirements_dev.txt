@@ -11,5 +11,3 @@ PyYAML==3.11
 
 pytest==2.9.2
 pytest-cov==2.2.1
-
-Eve==0.6.4
