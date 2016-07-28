@@ -79,7 +79,8 @@ Credits
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
 This package also use the `phonenumbers`_ package which is licensed under
-the `Apache2`_ license.
+the `Apache2`_ license. The `Cerberus`_ package which is an open-source project.
+`Eve`_ is licensed under the `BSD`_ license.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
@@ -87,3 +88,4 @@ the `Apache2`_ license.
 .. _`Eve`: http://python-eve.org
 .. _`phonenumbers`:  https://github.com/daviddrysdale/python-phonenumbers
 .. _`Apache2`: http://www.apache.org/licenses/LICENSE-2.0
+.. _`BSD`: http://python-eve.org/license.html
