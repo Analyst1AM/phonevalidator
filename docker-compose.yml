@@ -4,3 +4,4 @@ services:
         build: .
         volumes:
             - .:/usr/src/app
+        command: tox

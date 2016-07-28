@@ -1,3 +1,3 @@
-FROM mhoush/tox-onbuild
+FROM mhoush/tox
 
 CMD ["tox"]

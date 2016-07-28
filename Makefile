@@ -60,7 +60,7 @@ test: activate  ## run tests quickly with the default Python
 	py.test -v --cov-report term-missing --cov phonevalidator
 	
 test-all: clean  deactivate  ## run tests on every Python version with tox
-	tox
+	docker-compose up tox
 
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source phonevalidator py.test

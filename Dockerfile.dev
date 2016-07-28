@@ -3,4 +3,4 @@ FROM mhoush/py-dev:latest
 ENV PROJECT phonevalidator
 ENV PROJECT_PYTHON 3.5.0
 
-RUN /bin/bash -l /entrypoint.sh install
+RUN /bin/bash /entrypoint.sh install
