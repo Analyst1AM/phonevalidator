@@ -22,8 +22,8 @@ Features
   Uses the `phonenumbers`_ package for validation's and formatting.
   Tested under Python 2.7, Python 3.3, Python 3.4, and Python 3.5.
 
-Usage
-------
+Basic Usage
+-----------
 -------
 
 Cerberus Usage:
@@ -78,8 +78,12 @@ Credits
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
+This package also use the `phonenumbers`_ package which is licensed under
+the `Apache2`_ license.
+
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
 .. _`Cerberus`:  http://docs.python-cerberus.org
 .. _`Eve`: http://python-eve.org
 .. _`phonenumbers`:  https://github.com/daviddrysdale/python-phonenumbers
+.. _`Apache2`: http://www.apache.org/licenses/LICENSE-2.0

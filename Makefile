@@ -21,6 +21,7 @@ for line in sys.stdin:
 		print("%-20s %s" % (target, help))
 endef
 export PRINT_HELP_PYSCRIPT
+
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 
 help:
@@ -31,6 +32,15 @@ activate:  ## activate the virtualenv
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
+build-test-image: ## builds the docker test image if not already built
+	[ "$$(docker images -q phonevalidator:test)" == "" ] && \
+		docker build -t phonevalidator:test . || \
+	echo "Test image already exists"
+
+build-dev-image: ## builds the docker dev image if not already built
+	[ "$$(docker images -q phonevalidator:dev)" == "" ] && \
+		docker build -t phonevalidator:dev -f Dockerfile.dev . || \
+	echo "Dev image already exists."
 
 clean-build: ## remove build artifacts
 	rm -fr build/
@@ -54,13 +64,20 @@ deactivate: ## deactivate the virtualenv
 	pyenv local --unset
 
 lint: ## check style with flake8
-	flake8 phonevalidator tests
+	flake8 phonevalidator
 
 test: activate  ## run tests quickly with the default Python
 	py.test -v --cov-report term-missing --cov phonevalidator
 	
-test-all: clean  deactivate  ## run tests on every Python version with tox
-	docker-compose up tox
+test-all: clean ## run tests on every Python version with tox
+	tox
+
+run-tests: build-dev-image ## run test's quickly inside a docker container
+	docker run --rm phonevalidator:dev make test
+
+run-all-tests: build-test-image ## run the tests inside a docker container
+	docker run --rm phonevalidator:test make test-all
+	
 
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source phonevalidator py.test
@@ -69,7 +86,7 @@ coverage: ## check code coverage quickly with the default Python
 		coverage html
 		$(BROWSER) htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
+docs: activate ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/phonevalidator.rst
 	rm -f docs/modules.rst
 	sphinx-apidoc -o docs/ phonevalidator

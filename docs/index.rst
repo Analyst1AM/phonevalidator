@@ -13,8 +13,10 @@ Contents:
 
    readme
    installation
+   usage
    contributing
-   authorshistory
+   modules
+   authors
    history
    license
 
