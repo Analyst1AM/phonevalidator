@@ -66,14 +66,16 @@ deactivate: ## deactivate the virtualenv
 lint: ## check style with flake8
 	flake8 phonevalidator
 
-test: activate  ## run tests quickly with the default Python
-	py.test -v --cov-report term-missing --cov phonevalidator
+test: ## run tests quickly with the default Python
+	$(MAKE) clean &>/dev/null
+	pip install "$$PWD" &>/dev/null
+	py.test -vv --cov-report term-missing --cov phonevalidator
 	
 test-all: clean ## run tests on every Python version with tox
 	tox
 
 run-tests: build-dev-image ## run test's quickly inside a docker container
-	docker run --rm phonevalidator:dev make test
+	docker run --rm -v "$$PWD":/usr/src/app phonevalidator:dev make test
 
 run-all-tests: build-test-image ## run the tests inside a docker container
 	docker run --rm phonevalidator:test make test-all

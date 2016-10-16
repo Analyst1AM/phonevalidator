@@ -12,7 +12,6 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'phonenumbers==7.4.5',
     'cerberus==0.9.2',
-    #'eve==0.6.4',
 ]
 
 test_requirements = [
@@ -22,7 +21,7 @@ test_requirements = [
 ]
 
 setup_requirements = [
-    'pytest-runner',
+    # 'pytest-runner',
 ]
 
 setup(
@@ -44,7 +43,7 @@ setup(
     keywords='phonevalidator',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'Intende Audience :: Developers',
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",

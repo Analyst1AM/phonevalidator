@@ -1,6 +1,17 @@
-FROM mhoush/py-dev:latest
+FROM mhoush/py3
 
-ENV PROJECT phonevalidator
-ENV PROJECT_PYTHON 3.5.0
+COPY requirements_dev.txt /requirements_dev.txt
+COPY . /usr/src/app
 
-RUN /bin/bash /entrypoint.sh install
+RUN apk add --update make && \
+    pip install -r requirements_dev.txt && \
+    pip install /usr/src/app && \
+    rm -rf /var/tmp/* /root/.cache/* /var/cahce/apk/* /tmp/*
+
+ENV TERM=xterm-256color
+
+VOLUME /usr/src/app
+
+WORKDIR /usr/src/app
+
+CMD ["make", "test"]
