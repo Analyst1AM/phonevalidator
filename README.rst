@@ -22,57 +22,6 @@ Features
   Uses the `phonenumbers`_ package for validation's and formatting.
   Tested under Python 2.7, Python 3.3, Python 3.4, and Python 3.5.
 
-Basic Usage
------------
--------
-
-Cerberus Usage:
-===============
-.. code-block:: python
-
-    from phonevalidator import Validator
-
-    schema = {
-        'phone': {
-            'type': 'phonenumber',
-            'formatPhoneNumber': True,
-            'phoneNumberFormat': 'NATIONAL',
-            'region': 'US',
-        },
-    }
-
-    doc = {'phone': '5135555555'}
-
-    v = Validator(schema)
-    v.validate(doc)
-    # True
-    v.document
-    # {'phone': '(513) 555-5555'}
-
-    doc = {'phone': 'gibberish'}
-    v.validate(doc)
-    # False
-
-Eve Usage:
-==========
-.. code-block:: python
-
-    from phonevalidator import ValidatorMixin
-    from eve.io.mongo import Validator
-    from eve import Eve
-
-
-    class MyValidator(Validator, ValidatorMixin):
-        """ My custom validator that includes phone number 
-        validations.
-        """
-        pass
-
-
-    app = Eve(validator=MyValidtor)
-    ...
-
-
 Credits
 ---------
 

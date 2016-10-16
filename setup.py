@@ -31,7 +31,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Michael Housh",
     author_email='mhoush@houshhomeenergy.com',
-    url='https://github.com/m-housh/phonevalidator',
+    url='https://phonevalidator.readthedocs.io/en/latest/',
     packages=find_packages(),
     package_dir={'phonevalidator':
                  'phonevalidator'},
