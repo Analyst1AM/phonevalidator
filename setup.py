@@ -12,16 +12,16 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'phonenumbers==7.4.5',
     'cerberus==0.9.2',
-    #'eve==0.6.4',
 ]
 
 test_requirements = [
     'pytest',
-    'pytest-cov'
+    'pytest-cov',
+    'pytest-pep8',
 ]
 
 setup_requirements = [
-    'pytest-runner',
+    # 'pytest-runner',
 ]
 
 setup(
@@ -31,7 +31,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Michael Housh",
     author_email='mhoush@houshhomeenergy.com',
-    url='https://github.com/m-housh/phonevalidator',
+    url='https://phonevalidator.readthedocs.io/en/latest/',
     packages=find_packages(),
     package_dir={'phonevalidator':
                  'phonevalidator'},
@@ -54,6 +54,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    test_suite='tests',
+    test_suite='phonevalidator/test',
     tests_require=test_requirements
 )

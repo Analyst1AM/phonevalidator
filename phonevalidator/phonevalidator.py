@@ -9,36 +9,29 @@ from phonenumbers import (
     PhoneNumberFormat,
     SUPPORTED_REGIONS,
 )
+from cerberus import Validator as SuperValidator
 
 
 class ValidatorMixin(object):
     """ A custom cerberus.Validator subclass adding the `phonenumber` constraint
     to Cerberus validation's.
+
+
+    :Example:
+
+    .. code-block:: python
+
+        >>> from phonevalidator import ValidatorMixin
+        >>> from eve.io.mongo import Validator
+        >>> from eve import Eve
+        >>> class MyValidator(Validator, ValidatorMixin):
+        ...     ''' Custom validator that adds phone number
+        ...     validations.
+        ...     '''
+        ...     pass
+        >>> settings = {'DOMAIN': {}}
+        >>> app = Eve(validator=MyValidator, settings=settings)
     """
-    '''
-    def __init__(self, *args, **kwargs):
-        super(ValidatorMixin, self).__init__()
-        self.formatter = None
-        self.region = None
-
-        if formatter is not None:
-            # set formatter for this instance to the formatter
-            # passed in if valid, if not self.formatter will
-            # get set to the default (`PhoneNumberFormat.NATIONAL`)
-            self._set_formatter(
-                formatter=formatter
-            )
-
-        if region is not None:
-            # set the region for this instance to validate
-            # phone numbers against if valid, if not valid
-            # the self.region will get set to the default
-            # ('US')
-            self._set_region(
-                region=region
-            )
-        '''
-
     def _default_region(self):
         """ Return's a default region string.
 
@@ -153,3 +146,35 @@ class ValidatorMixin(object):
                                                      self.formatter)
         except NumberParseException:
             self._error(field, 'Phone Number not valid: {}'.format(value))
+
+
+class Validator(SuperValidator, ValidatorMixin):
+    """ Extends `cerberus.Validator` and adds the `phonenumber` constraint
+    to Cerburus validation's.
+
+    :Example:
+
+    .. code-block:: python
+
+        >>> from phonevalidator import Validator
+        >>> schema = {
+        ...     'phone': {
+        ...         'type': 'phonenumber',
+        ...         'formatPhoneNumber': True,
+        ...         'phoneNumberFormat': 'NATIONAL',
+        ...         'region': 'US'
+        ...     }
+        ... }
+        >>> doc = {'phone': '5135555555'}
+        >>> v = Validator(schema)
+        >>> v.validate(doc)
+        True
+        >>> v.document
+        {'phone': '(513) 555-5555'}
+        >>> doc = {'phone': 'gibberish'}
+        >>> v.validate(doc)
+        False
+
+
+    """
+    pass

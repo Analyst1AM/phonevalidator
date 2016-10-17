@@ -1,6 +1,13 @@
 phonevalidator package
 ======================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    phonevalidator.test
+
 Submodules
 ----------
 
